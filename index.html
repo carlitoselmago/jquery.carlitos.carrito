@@ -1,0 +1,123 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--CSS-->
+    <style type="text/css">
+        body {
+            margin:50px;
+            background-color:grey;
+            color:white;
+            font-family:arial;
+            font-size:18px;
+        }
+        #status{
+            width:100%;
+            text-align:center;
+            top:0;
+            position:fixed;
+            margin-top:12px;
+            font-size:16px;
+            color:yellow;
+        }
+        #cart{
+            position:fixed;
+            right:45px;
+            
+        }
+        .buy,#listCart,.deleteProduct{
+            cursor:pointer;
+        }
+        #CartList{
+            font-size: 12px;
+            color: yellow;
+            margin-top:12px;
+        }
+        .cartListProdName, .cartListProdPrice{
+            display:inline-block;
+        }
+        .cartListProdmainInfo{
+            font-size:14px;
+            font-weight:bold;
+        }
+        .cartListProd{
+            margin-bottom:8px;
+            padding-bottom:8px;
+            border-bottom:solid 1px white;
+        }
+        .deleteProduct{
+            margin-top:8px;
+        }
+    </style>
+
+
+    <!--JS-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="js/jquery.carlitos.carrito/jquery.carlitos.carrito.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('body').carlitosCarrito({
+                phpscriptsRelativeFolder: 'js/jquery.carlitos.carrito/php_scripts/',
+                addtoCartSelector: '.buy',
+                cartCounterSelector: '#counter',
+                removefromCartSelector: '.deleteProduct',
+                onUpdateCartSuccess: carritoupdatedSuccess,
+                onaddtoCartSucces:addtocartSuccess,
+                onaddtoCartClick:addtocartAction
+            });
+            
+            //Custom event functions
+            function carritoupdatedSuccess(){
+                $("#status").text("Cart loaded");
+                console.log("Cart loaded");
+            }
+            function addtocartSuccess(){
+                $("#status").text("Product Added successfully");
+                console.log("Product Added successfully");
+            }
+            function addtocartAction(){
+                 $("#status").text("Loading...");
+                console.log("Loading...");
+            }
+            
+        });
+    </script>
+</head>
+
+<body>
+
+    <div id="status">
+
+    </div>
+
+    <div id="cart">
+        <span id="counter">0</span>items
+        <div id="listCart">Show products</div>
+        <div id="CartList"></div>
+    </div>
+
+    <div id="products">
+
+        <div class="product">
+            <h3>Product #1 35€</h3>
+            <div class="buy" productId="1" productPrice="35">Add to cart</div>
+
+        </div>
+
+        <div class="product">
+            <h3>Product #2 (with options) 57€</h3>
+            <div class="buy" productId="2" productPrice="57" productOptionlabels="Last minute, Color" productOptions="Yes,Yellow">Add to cart</div>
+
+        </div>
+
+        <div class="product">
+            <h3>Donation to developer 5€</h3>
+            <div class="buy" productId="80" productPrice="5" productOptionlabels="donation">Add to cart</div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
